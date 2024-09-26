@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <h1>Mi curso javascript</h1>
+    <div id="app"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+
+//7. Introducción al DOM
+/*
+Ejercicio 1:
+En el html muestra tres elementos de tipo <p> y haz un botón que 
+dispara una función y nos permita cambiar 
+todos nuestros elementos de tipo p en nuestra pagina de color azul
+*/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color de P</title>
+    <style>
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <p>Este es el primer párrafo.</p>
+    <p>Este es el segundo párrafo.</p>
+    <p>Este es el tercer párrafo.</p>
+    <button id="cambiarColorBtn">Cambiar color a azul</button>
+
+    <script>
+        // Función para cambiar el color de todos los elementos <p> a azul
+        function cambiarColor() {
+            // Obtener todos los elementos <p>
+            let elementosP = document.querySelectorAll('p');
+            
+            // Cambiar el color de cada elemento <p>
+            elementosP.forEach(function(elemento) {
+                elemento.style.color = 'blue';
+            });
+        }
+
+        // Asignar la función al botón
+        document.getElementById('cambiarColorBtn').onclick = cambiarColor;
+    </script>
+</body>
+</html>
+
+//Ejercicio 2:
+Crea un formulario simple con un campo de texto y un botón. 
+Escribe un script en JavaScript que muestre una alerta con 
+el valor ingresado en el campo de texto cuando el usuario haga clic en el botón.//
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Simple</title>
+</head>
+<body>
+    <h1>Formulario de Ejemplo</h1>
+    <form id="miFormulario">
+        <label for="campoTexto">Ingresa un valor:</label>
+        <input type="text" id="campoTexto" placeholder="Escribe aquí...">
+        <button type="button" id="botonMostrar">Mostrar Alerta</button>
+    </form>
+
+    <script>
+        // Asignar la función al botón
+        document.getElementById('botonMostrar').onclick = function() {
+            // Obtener el valor del campo de texto
+            let valor = document.getElementById('campoTexto').value;
+            // Mostrar alerta con el valor ingresado
+            alert("El valor ingresado es: " + valor);
+        };
+    </script>
+</body>
+</html>
+
+//8. Eventos en DOM
+/*
+Ejercicio 1:
+Crea una lista (<ul>) con varios elementos (<li>). Escribe un script que agregue un evento click a cada elemento de la lista para que, 
+cuando se haga clic en un li, se muestre su texto en la consola.
+*/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Interactiva</title>
+</head>
+<body>
+    <h1>Lista de Elementos</h1>
+    <ul id="miLista">
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+        <li>Elemento 4</li>
+        <li>Elemento 5</li>
+    </ul>
+
+    <script>
+        // Obtener todos los elementos <li> de la lista
+        let elementosLi = document.querySelectorAll('#miLista li');
+
+        // Agregar un evento click a cada elemento <li>
+        elementosLi.forEach(function(elemento) {
+            elemento.addEventListener('click', function() {
+                console.log("Texto del elemento: " + this.textContent);
+            });
+        });
+    </script>
+</body>
+</html>
+
+//Ejercicio 2:
+Crea un campo de texto y un botón en una página HTML. Escribe un script que haga que el botón deshabilite el campo de texto cuando se haga clic en él. Luego, añade otro botón que vuelva a habilitar el campo de texto.
+Requisitos: al estar deshabilitado nuestro input no puede apretarse, no tiene hover y al habilitarse si//
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshabilitar y Habilitar Campo de Texto</title>
+    <style>
+        /* Estilos para el campo de texto deshabilitado */
+        input:disabled {
+            background-color: #f0f0f0; /* Color de fondo para el campo deshabilitado */
+            cursor: not-allowed; /* Cambia el cursor al pasar sobre el campo deshabilitado */
+        }
+    </style>
+</head>
+<body>
+    <h1>Control de Campo de Texto</h1>
+    <input type="text" id="campoTexto" placeholder="Escribe algo aquí...">
+    <button id="botonDeshabilitar">Deshabilitar Campo</button>
+    <button id="botonHabilitar">Habilitar Campo</button>
+
+    <script>
+        // Obtener elementos del DOM
+        const campoTexto = document.getElementById('campoTexto');
+        const botonDeshabilitar = document.getElementById('botonDeshabilitar');
+        const botonHabilitar = document.getElementById('botonHabilitar');
+
+        // Evento para deshabilitar el campo de texto
+        botonDeshabilitar.onclick = function() {
+            campoTexto.disabled = true; // Deshabilitar el campo de texto
+        };
+
+        // Evento para habilitar el campo de texto
+        botonHabilitar.onclick = function() {
+            campoTexto.disabled = false; // Habilitar el campo de texto
+        };
+    </script>
+</body>
+</html>
+//9
+/Ejercicio 1:
+Crea un formulario con un campo para el correo electrónico. 
+Escribe un script que guarde el correo en localStorage cuando el usuario envíe el formulario. si este existe muestralo en el dom debajo del input y tambien haz un botón de eliminar este elemento, 
+al recargar la pagina este debe mostrarse si existe/
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Correo Electrónico</title>
+</head>
+<body>
+    <h1>Formulario de Correo Electrónico</h1>
+    <form id="miFormulario">
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" placeholder="ingrese su correo aquí..." required>
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="correoGuardado"></div>
+    <button id="eliminarCorreo" style="display: none;">Eliminar Correo</button>
+
+    <script>
+        // Obtener elementos del DOM
+        const formulario = document.getElementById('miFormulario');
+        const correoInput = document.getElementById('correo');
+        const correoGuardadoDiv = document.getElementById('correoGuardado');
+        const eliminarCorreoBtn = document.getElementById('eliminarCorreo');
+
+        // Cargar el correo del localStorage al cargar la página
+        window.onload = function() {
+            const correoGuardado = localStorage.getItem('correo');
+            if (correoGuardado) {
+                correoGuardadoDiv.textContent = `Correo guardado: ${correoGuardado}`;
+                eliminarCorreoBtn.style.display = 'inline'; // Mostrar botón de eliminar
+            }
+        };
+
+        // Evento para manejar el envío del formulario
+        formulario.onsubmit = function(event) {
+            event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+
+            const correo = correoInput.value; // Obtener el valor del correo
+            localStorage.setItem('correo', correo); // Guardar el correo en localStorage
+            
+            // Mostrar el correo guardado
+            correoGuardadoDiv.textContent = `Correo guardado: ${correo}`;
+            eliminarCorreoBtn.style.display = 'inline'; // Mostrar botón de eliminar
+            correoInput.value = ''; // Limpiar el campo de entrada
+        };
+
+        // Evento para eliminar el correo del localStorage
+        eliminarCorreoBtn.onclick = function() {
+            localStorage.removeItem('correo'); // Eliminar el correo de localStorage
+            correoGuardadoDiv.textContent = ''; // Limpiar el texto mostrado
+            eliminarCorreoBtn.style.display = 'none'; // Ocultar el botón de eliminar
+        };
+    </script>
+</body>
+</html>
